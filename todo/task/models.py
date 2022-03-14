@@ -1,6 +1,8 @@
 """Models relating to task"""
 
-from todo.user.models import User
+from typing import TYPE_CHECKING
+
+
 from ..database import (
     Boolean,
     Column,
@@ -13,6 +15,9 @@ from ..database import (
     Date,
     relationship,
 )
+
+if TYPE_CHECKING:
+    from todo.user.models import User
 
 
 class Task(Model):
@@ -27,8 +32,8 @@ class Task(Model):
 
     completed = Column(Boolean, nullable=False, default=False)
 
-    user_id = Column(Integer, ForeignKey("user.id"), nullable=False, index=True)
-    user: User = relationship("User", back_populates="tasks", lazy=False)  # type: ignore
+    user_id = Column(Integer, ForeignKey("user.user_id"), nullable=False, index=True)
+    user: "User" = relationship("User", back_populates="tasks", lazy=False)  # type: ignore
 
     def __repr__(self) -> str:
         return f"Task: id={self.task_id}, title={self.title}"

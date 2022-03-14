@@ -9,6 +9,12 @@ class Config:
     PORT = 5000
     DEBUG = False
     TESTING = False
+    DATABASE_PATH = "../todo.sqlite"
+
+    @property
+    def SQLALCHEMY_DATABASE_URI(self):
+        """Getter for database uri"""
+        return "sqlite:///" + self.DATABASE_PATH
 
 
 class DevelopmentConfig(Config):
@@ -32,3 +38,8 @@ class TestConfig(Config):
     ENV = "test"
     DEBUG = False  # we want our tests to reflect production
     TESTING = True
+
+    @property
+    def SQLALCHEMY_DATABASE_URI(self):
+        """Getter for database uri"""
+        return "sqlite:///:memory:"
