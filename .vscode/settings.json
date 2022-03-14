@@ -1,5 +1,7 @@
 {
   "python.linting.pylintEnabled": true,
   "python.linting.enabled": true,
-  "python.analysis.typeCheckingMode": "basic"
+  "python.analysis.typeCheckingMode": "basic",
+  "cSpell.words": ["sqlalchemys"],
+  "python.linting.pylintArgs": ["--load-plugins", "pylint_flask_sqlalchemy"]
 }
