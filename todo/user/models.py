@@ -1,5 +1,5 @@
 """Set of models for the user blueprint"""
-from todo.database import Column, Integer, Model, String, Text
+from ..database import Column, Integer, Model, String, Text
 
 
 class User(Model):
