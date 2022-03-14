@@ -21,6 +21,7 @@ Integer: Type[sqlalchemy.Integer] = db.Integer
 String: Type[sqlalchemy.String] = db.String
 Text: Type[sqlalchemy.Text] = db.Text
 DateTime: Type[sqlalchemy.DateTime] = db.DateTime
+Date: Type[sqlalchemy.Date] = db.Date
 Float: Type[sqlalchemy.Float] = db.Float
 Boolean: Type[sqlalchemy.Boolean] = db.Boolean
 PickleType: Type[sqlalchemy.PickleType] = db.PickleType

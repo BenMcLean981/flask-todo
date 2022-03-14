@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div>
+    {% if task %}
+        <h1>Task id={{task.task_id}}</h1>
+    {% else %}
+        <h1>No task</h1>
+    {% endif %}    
+</div>
+
+{% endblock %}
