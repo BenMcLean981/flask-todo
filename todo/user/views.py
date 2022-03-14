@@ -2,8 +2,8 @@
 
 from flask import Blueprint, render_template
 
-from todo.user.models import User
-from todo.database import db
+from .models import User
+from ..database import db
 
 user_blueprint = Blueprint("user", __name__, template_folder="templates")
 
