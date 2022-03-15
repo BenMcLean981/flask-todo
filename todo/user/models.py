@@ -42,3 +42,7 @@ class User(UserMixin, Model):
         an "id" property must be told how to get it
         """
         return self.user_id
+
+    def get_num_completed(self) -> int:
+        """Just returns the number of tasks the user has completed."""
+        return sum([1 for t in self.tasks if t.completed])

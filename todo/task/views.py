@@ -29,19 +29,13 @@ def ensure_login() -> Union[None, Response]:
         return redirect(url_for("user.view_sign_in"))
 
 
-def get_task_view(form: NewTaskForm = NewTaskForm()) -> str:
+def get_task_view(form: NewTaskForm) -> str:
     """Helper to return common view to PUT and GET methods"""
-    tasks = Task.get_all()
-    # alternatively we could query for complete and incomplete respectively.
-    # but I believe doing one query and then a filter will be quicker
-
-    incomplete_tasks = [t for t in tasks if not t.completed]
-    completed_tasks = [t for t in tasks if t.completed]
+    incomplete_tasks = Task.get_all_incomplete()
 
     return render_template(
         "task_list.html",
         incomplete_tasks=incomplete_tasks,
-        completed_tasks=completed_tasks,
         form=form,
     )
 
@@ -53,7 +47,7 @@ def view_task_list():
     if send_to_login:
         return send_to_login
     else:
-        return get_task_view()
+        return get_task_view(NewTaskForm())
 
 
 @task_blueprint.route("/task", methods=["POST"])

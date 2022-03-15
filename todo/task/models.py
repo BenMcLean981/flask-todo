@@ -87,6 +87,8 @@ class Task(Model):
         return new_task
 
     @staticmethod
-    def get_all() -> List["Task"]:
+    def get_all_incomplete() -> List["Task"]:
         """Helper to return all tasks"""
-        return Task.query.filter_by(user_id=current_user.user_id).all()
+        return Task.query.filter_by(
+            user_id=current_user.user_id, completed=False
+        ).all()
