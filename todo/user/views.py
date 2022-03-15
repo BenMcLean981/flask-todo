@@ -1,7 +1,7 @@
 """User blueprint for anything related to the user"""
 
 from flask import Blueprint, flash, redirect, render_template, url_for
-from flask_login import login_user
+from flask_login import login_user, logout_user
 
 from werkzeug.security import (
     check_password_hash,
@@ -84,3 +84,9 @@ def sign_up():
             return redirect(url_for("user.view_user", user_id=user.user_id))
     else:
         return render_template("sign-up.html", form=form)
+
+
+@user_blueprint.route("/user/sign-out", methods=["GET"])
+def sign_out():
+    logout_user()
+    return redirect(url_for("home.view_home"))
