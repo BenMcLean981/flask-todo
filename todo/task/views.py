@@ -54,5 +54,19 @@ def complete_task(task_id: int):
     task.completed = True
     db.session.commit()
 
-    flash(f'Good job! You completed "{task.title}"')
+    flash(f'Good job! You completed "{task.title}"', "success")
+    return redirect(url_for("task.view_task_list"))
+
+
+@task_blueprint.route("/task/complete/<int:task_id>", methods=["GET"])
+def delete_task(task_id: int):
+    """Remove task with associated ID from the database."""
+    task = Task.query.filter_by(task_id=task_id).first()
+    if task is None:
+        abort("Task does not exist!")
+
+    db.session.delete(task)
+    db.session.commit()
+
+    flash(f'You deleted "{task.title}"', "info")
     return redirect(url_for("task.view_task_list"))
