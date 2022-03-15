@@ -20,7 +20,6 @@ def create_app(config_object: Config = ProductionConfig()) -> Flask:
     _register_blueprints(app)
     _register_database(app)
     _register_login_manager(app)
-    _register_jinja_filters(app)
 
     return app
 
@@ -50,7 +49,3 @@ def _register_blueprints(app: Flask) -> None:
     app.register_blueprint(home_blueprint)
     app.register_blueprint(user_blueprint)
     app.register_blueprint(task_blueprint)
-
-
-def _register_jinja_filters(app: Flask) -> None:
-    """Register jinja filters for templates"""
