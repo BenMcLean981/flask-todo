@@ -58,12 +58,15 @@
     </div>
     <hr />
 
+    {% if incomplete_tasks %}
     {% for task in incomplete_tasks %}
     {{show_task(task)}}
     {% endfor %}
+    {% else %}
     <div class="d-flex justify-content-center">
         <h3>Good job! You are done all of your tasks.</h3>
     </div>
+    {% endif %}
 </div>
 
 {% endblock %} {% macro show_task(task) %}
