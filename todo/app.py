@@ -1,10 +1,13 @@
 """Module for application factory"""
+from typing import Union
 from flask import Flask
+from flask_login import LoginManager
 
 from todo.database import db
 from todo.config import Config, ProductionConfig
 
 from todo.home.views import home_blueprint
+from todo.user.models import User
 from todo.user.views import user_blueprint
 from todo.task.views import task_blueprint
 
@@ -16,6 +19,7 @@ def create_app(config_object: Config = ProductionConfig()) -> Flask:
 
     _register_blueprints(app)
     _register_database(app)
+    _register_login_manager(app)
     _register_jinja_filters(app)
 
     return app
@@ -27,6 +31,17 @@ def _register_database(app: Flask) -> None:
 
     with app.app_context():
         db.create_all()
+
+
+def _register_login_manager(app: Flask) -> None:
+    """Register the login manager"""
+    login_manager = LoginManager()
+    login_manager.login_view = "user.view_sign_in"
+    login_manager.init_app(app)
+
+    @login_manager.user_loader
+    def _load_user(user_id: str) -> Union[User, None]:
+        return User.query.get(int(user_id))
 
 
 def _register_blueprints(app: Flask) -> None:
