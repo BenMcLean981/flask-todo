@@ -2,6 +2,12 @@
 
 This is a little flask project I made using jinja templates to show off a little todo app. It supports multiple users, each with their own tasks. I used SQLite for the database, SQLAlchemy for the ORM. I didn't focus very much on the frontend for this application, if you would like my frontend work checkout my [porfolio website](http://benmclean981.github.io/).
 
+The main features of this application that I want to highlight are:
+
+- My code, I think I write very clean simple code.
+- The database models and the relationships they have. Admittedly this is a small project, but it shows my understanding of databases.
+- Project structure, I think I do a good job at making my project structure understandable. I like patterns and I try to do whatever the framework maintainers recommend.
+
 ### Development Environment
 
 It is my personal opinion that all developers on a project should share the same dev environment. As such, I have committed my .vscode and .pylintrc files. I recommend you use VSCode if you want to run this project or make any of your own changes.
