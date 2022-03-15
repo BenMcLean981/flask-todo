@@ -46,11 +46,13 @@ def view_task_list():
 
 @task_blueprint.route("/task/complete/<int:task_id>", methods=["GET"])
 def complete_task(task_id: int):
+    """Modify task_id to have completed attribute set to True"""
     task = Task.query.filter_by(task_id=task_id).first()
     if task is None:
         abort("Task does not exist!")
 
     task.completed = True
-    flash(f'Good job! You completed "{task.title}"')
+    db.session.commit()
 
+    flash(f'Good job! You completed "{task.title}"')
     return redirect(url_for("task.view_task_list"))
