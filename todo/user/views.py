@@ -7,7 +7,6 @@ from flask_login import login_user, logout_user
 from todo.user.forms import SignInForm, SignUpForm
 
 from .models import User
-from ..database import db
 
 user_blueprint = Blueprint("user", __name__, template_folder="templates")
 
