@@ -3,10 +3,7 @@
 from flask import Blueprint, flash, redirect, render_template, url_for
 from flask_login import login_user, logout_user
 
-from werkzeug.security import (
-    check_password_hash,
-    generate_password_hash,
-)
+
 from todo.user.forms import SignInForm, SignUpForm
 
 from .models import User
@@ -28,11 +25,11 @@ def sign_in():
     """Handle sign-in form submission"""
     form = SignInForm()
     if form.validate_on_submit():
-        user: User = User.query.filter_by(email=form.email.data).first()
+        user = User.get_by_email(form.email.data)
         if user is None:
             flash("Sign-in unsuccessful, no user with e-mail.", "danger")
             return render_template("sign-in.html", form=form)
-        elif not check_password_hash(user.password_hash, form.password.data):
+        elif not user.authenticate(form.password.data):
             flash("Sign-in unsuccessful, password incorrect!", "danger")
             return render_template("sign-in.html", form=form)
         else:
@@ -58,25 +55,17 @@ def sign_up():
     """Handle sign-up form submission"""
     form = SignUpForm()
     if form.validate_on_submit():
-        email = form.email.data
-        password = form.password.data
-        # bcrypt is an alternative that is supposedly more
-        # secure, but not necessary for this project
-        password_hash = generate_password_hash(password)
-
-        existing_user = db.session.query(User).filter_by(email=email).first()
-        if existing_user:
+        try:
+            user = User.create_user(form.email.data, form.password.data)
+            login_user(user, remember=form.remember.data)
+            return redirect(url_for("task.view_task_list"))
+        except ValueError:
             flash(
                 "Sign-up unsuccessful, user with that e-mail already exists.",
                 "danger",
             )
             return render_template("sign-up.html", form=form)
-        else:
-            user = User(email=email, password_hash=password_hash)  # type: ignore
-            db.session.add(user)
-            db.session.commit()
-            login_user(user, remember=form.remember.data)
-            return redirect(url_for("task.view_task_list"))
+
     else:
         return render_template("sign-up.html", form=form)
 
