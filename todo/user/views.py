@@ -88,5 +88,6 @@ def sign_up():
 
 @user_blueprint.route("/user/sign-out", methods=["GET"])
 def sign_out():
+    """Handle user sign-out."""
     logout_user()
     return redirect(url_for("home.view_home"))

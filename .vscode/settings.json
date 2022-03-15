@@ -2,7 +2,7 @@
   "python.linting.pylintEnabled": true,
   "python.linting.enabled": true,
   "python.analysis.typeCheckingMode": "off",
-  "cSpell.words": ["sqlalchemys"],
+  "cSpell.words": ["endmacro", "sqlalchemys"],
   "python.linting.pylintArgs": ["--load-plugins", "pylint_flask_sqlalchemy"],
   "python.formatting.blackArgs": ["--line-length=79"]
 }
