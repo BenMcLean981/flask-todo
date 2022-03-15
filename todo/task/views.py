@@ -1,7 +1,5 @@
 """Set of views for the tasks module"""
 
-from datetime import datetime
-from os import abort
 from typing import Union
 
 from flask import (
