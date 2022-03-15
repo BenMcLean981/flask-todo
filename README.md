@@ -27,4 +27,4 @@ If you are not using VSCode, run the following:
 
 ### Testing
 
-I threw this together in a hurry (< 2 days), and testing is the area that suffered the most. This is unfortunate because I really think automated tests are as important as the source code, especially with Python due to the fact that it does everything at runtime. What tests I do have can be run with `pytest`.
+I threw this together in a hurry (< 2 days), and testing is the area that suffered the most. This is unfortunate because I really think automated tests are as important as the source code, especially with Python due to the fact that it does everything at runtime.
